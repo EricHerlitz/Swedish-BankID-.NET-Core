@@ -9,5 +9,6 @@ What you get in the current project is an API that can talk to the BankID API. A
 * Publish the tests
 * Publish the documentation
 * Publish some howtos
+* Publish some example (standard) GUI's
 * Add Azure Key Vault support
-
+* Publish NuGet packages
