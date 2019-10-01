@@ -40,15 +40,5 @@ namespace Herlitz.BankID
         public User User { get; set; }
 
         #endregion
-
-        /// <summary>
-        /// Generated access token (if requested)
-        /// </summary>
-        public string AccessToken { get; set; }
-
-        /// <summary>
-        /// Generated identity token (if requested)
-        /// </summary>
-        public string IdentityToken { get; set; }
     }
 }

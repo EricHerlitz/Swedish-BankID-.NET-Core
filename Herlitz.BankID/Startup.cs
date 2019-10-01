@@ -46,13 +46,6 @@ namespace Herlitz.BankID
         {
             services.Configure<BankIDConfig>(Configuration.GetSection(typeof(BankIDConfig).Name));
 
-            // Identityserver resources
-            services.AddHttpClient("IdentityServerClient", client =>
-            {
-                // required to use ReadAsAsync
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            });
-
             // Add bankid
             services.AddBankID();
 
@@ -69,8 +62,8 @@ namespace Herlitz.BankID
                     Version = "1.0",
                     Contact = new Contact
                     {
-                        Name = "Herr Nils Nordström",
-                        Email = "nils.nordstrom@Herlitz.com"
+                        Name = "Whom Ever",
+                        Email = "whomever@what.com"
                     }
                 });
 

@@ -121,10 +121,9 @@ namespace Herlitz.BankID.Controllers
         /// Collect request from BankID
         /// </summary>
         /// <param name="orderRef">Order reference from BankID</param>
-        /// <param name="requestToken">Generate tokens from Identity Server</param>
         /// <returns></returns>
         [HttpGet("Collect")]
-        public async Task<ActionResult<ICollectResponse>> GetCollect(string orderRef, bool requestToken = false)
+        public async Task<ActionResult<ICollectResponse>> GetCollect(string orderRef)
         {
             _collectRequest.OrderRef = orderRef;
             ICollectResponse response = await _bankIdService.Collect(_collectRequest);

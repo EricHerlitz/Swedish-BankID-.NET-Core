@@ -7,7 +7,5 @@
         Cert Cert { get; set; }
         Device Device { get; set; }
         User User { get; set; }
-        string AccessToken { get; set; }
-        string IdentityToken { get; set; }
     }
 }
