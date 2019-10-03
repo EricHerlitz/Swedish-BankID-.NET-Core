@@ -1,5 +1,5 @@
 # Swedish BankID .NET Core
-Swedish BankID implementation written for .NET Core
+Swedish BankID implementation written for .NET Core. This version does support the new BankID JSON interface.
 
 Currently containing the initial (working) commit, this can be run in production if you just configure the certificates. For now you'll need to reply on my previous blog post (http://www.herlitz.nu/2017/09/13/integrating-with-swedish-bankid-and-.net/) to understand the process.
 
