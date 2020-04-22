@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  herlitz.bankid:
+    image: ${DOCKER_REGISTRY-}herlitz/bankid
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443
+      - ASPNETCORE_HTTPS_PORT=8443
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=kalleanka
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    ports:
+      - 8443:443
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    build:
+      context: .
+      dockerfile: Herlitz.BankID/Dockerfile

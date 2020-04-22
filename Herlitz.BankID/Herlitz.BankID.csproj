@@ -6,6 +6,7 @@
     <RootNamespace>Herlitz.BankID</RootNamespace>
     <UserSecretsId>2ecdfe0b-a24b-4b3d-8bc9-6b8d322e72f6</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

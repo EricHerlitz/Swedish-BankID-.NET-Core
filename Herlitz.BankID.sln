@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Herlitz.BankID", "Herlitz.BankID\Herlitz.BankID.csproj", "{1572DEA9-8B7E-4F9A-BE51-B1CDC92A27A5}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{08EFC6EA-B3F6-4B18-9B29-CC8164FA7762}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1572DEA9-8B7E-4F9A-BE51-B1CDC92A27A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1572DEA9-8B7E-4F9A-BE51-B1CDC92A27A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1572DEA9-8B7E-4F9A-BE51-B1CDC92A27A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08EFC6EA-B3F6-4B18-9B29-CC8164FA7762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08EFC6EA-B3F6-4B18-9B29-CC8164FA7762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08EFC6EA-B3F6-4B18-9B29-CC8164FA7762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08EFC6EA-B3F6-4B18-9B29-CC8164FA7762}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

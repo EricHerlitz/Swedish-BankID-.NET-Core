@@ -2,13 +2,12 @@
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 WORKDIR /app
-EXPOSE 80
+#EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["Herlitz.BankID/Herlitz.BankID.csproj", "Herlitz.BankID/"]
-COPY ["Herlitz.BankID.Core/Herlitz.BankID.Core.csproj", "Herlitz.BankID.Core/"]
 RUN dotnet restore "Herlitz.BankID/Herlitz.BankID.csproj"
 COPY . .
 WORKDIR "/src/Herlitz.BankID"
