@@ -21,10 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Herlitz.BankID.Core\Herlitz.BankID.Core.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="bankid.cer">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

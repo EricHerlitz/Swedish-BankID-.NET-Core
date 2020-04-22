@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.28729.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Herlitz.BankID", "Herlitz.BankID\Herlitz.BankID.csproj", "{1572DEA9-8B7E-4F9A-BE51-B1CDC92A27A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Herlitz.BankID.Core", "Herlitz.BankID.Core\Herlitz.BankID.Core.csproj", "{76D72D57-7C64-450F-8EAB-4EB1B9AF2098}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,20 +15,9 @@ Global
 		{1572DEA9-8B7E-4F9A-BE51-B1CDC92A27A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1572DEA9-8B7E-4F9A-BE51-B1CDC92A27A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1572DEA9-8B7E-4F9A-BE51-B1CDC92A27A5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0A8284E6-AC44-491D-8456-2262CA1419DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0A8284E6-AC44-491D-8456-2262CA1419DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0A8284E6-AC44-491D-8456-2262CA1419DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0A8284E6-AC44-491D-8456-2262CA1419DC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{76D72D57-7C64-450F-8EAB-4EB1B9AF2098}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{76D72D57-7C64-450F-8EAB-4EB1B9AF2098}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{76D72D57-7C64-450F-8EAB-4EB1B9AF2098}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{76D72D57-7C64-450F-8EAB-4EB1B9AF2098}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{0A8284E6-AC44-491D-8456-2262CA1419DC} = {9672641C-751C-4CB8-85E4-2B43737AD734}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E9E498A1-FA87-41A7-92E0-1A4EBFEBBD55}
