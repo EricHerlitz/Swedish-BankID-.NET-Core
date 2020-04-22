@@ -1,10 +1,7 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Herlitz.BankID.Controllers
 {
@@ -134,14 +131,14 @@ namespace Herlitz.BankID.Controllers
 
         // Status
         [HttpGet("Status")]
-        public async Task<ActionResult<string>> GetStatus(string hintCode, bool usingAutostart = false)
+        public ActionResult<string> GetStatus(string hintCode, bool usingAutostart = false)
         {
             var statusMessage = _statusHandler.GetStatus(hintCode, usingAutostart);
             return new ActionResult<string>(statusMessage);
         }
 
         [HttpGet("ClientIP")]
-        public async Task<ActionResult<string>> GetClientIP()
+        public ActionResult<string> GetClientIP()
         {
             string forwardedForKey = "X-Forwarded-For";
 

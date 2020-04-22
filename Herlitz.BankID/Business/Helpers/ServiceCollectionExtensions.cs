@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -7,10 +6,8 @@ using System.Net.Http.Headers;
 using System.Security;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Herlitz.BankID
@@ -25,9 +22,10 @@ namespace Herlitz.BankID
         //    _telemetryClient = new TelemetryClient();
         //}
 
-        public BankIDHttpClientHandler(BankIDServiceSettings bankIdServiceSettings)
+        public BankIDHttpClientHandler(BankIDServiceSettings bankIdServiceSettings, TelemetryClient telemetryClient)
         {
-            _telemetryClient = new TelemetryClient();
+            //TelemetryConfiguration.Active
+            _telemetryClient = telemetryClient; // new TelemetryClient();
             _bankIdServiceSettings = bankIdServiceSettings;
             //var bankIdServiceSettings = new BankIDServiceSettings(env);
 

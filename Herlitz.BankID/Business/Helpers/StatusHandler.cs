@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Net.Http.Headers;
 
 namespace Herlitz.BankID
 {
@@ -83,8 +81,6 @@ namespace Herlitz.BankID
                     // To use the status code
                     return codes[hintCode];
             }
-
-            return null;
         }
 
         public string GetError(HttpStatusCode httpStatus, IErrorResponse errorResponse = null)

@@ -3,12 +3,13 @@ using Herlitz.BankID.Core;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Hosting;
 
 namespace Herlitz.BankID
 {
     public class BankIDServiceSettings
     {
-        private readonly IHostingEnvironment _environment;
+        private readonly IWebHostEnvironment _environment;
         private readonly BankIDConfig _bankIdConfig;
 
         public Uri ApiUrl { get; private set; }
@@ -25,7 +26,7 @@ namespace Herlitz.BankID
         public string RpCertThumbprint { get; private set; }
         public string CaCertThumbprint { get; private set; }
 
-        public BankIDServiceSettings(IHostingEnvironment environment, IOptions<BankIDConfig> bankIdConfig)
+        public BankIDServiceSettings(IWebHostEnvironment environment, IOptions<BankIDConfig> bankIdConfig)
         {
             _environment = environment;
             _bankIdConfig = bankIdConfig.Value;

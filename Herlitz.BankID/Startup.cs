@@ -1,28 +1,29 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using System.Net.Http.Headers;
 using System.Reflection;
 using Herlitz.BankID.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.Extensions.Hosting;
+
+
+// dotnet dev-certs https --trust
 
 namespace Herlitz.BankID
 {
     public class Startup
     {
-        private readonly IHostingEnvironment _environment;
+        private readonly IWebHostEnvironment _environment;
         public IConfiguration Configuration { get; }
 
         private bool _useXmlComments = false;
 
 
-        public Startup(IConfiguration configuration, IHostingEnvironment environment)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             _environment = environment;
 
@@ -55,12 +56,12 @@ namespace Herlitz.BankID
             // Configure Swagger
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Title = "Herlitz BankID internal API",
                     Description = "Internal API for BankID services",
                     Version = "1.0",
-                    Contact = new Contact
+                    Contact = new Microsoft.OpenApi.Models.OpenApiContact
                     {
                         Name = "Whom Ever",
                         Email = "whomever@what.com"
@@ -80,30 +81,40 @@ namespace Herlitz.BankID
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
 
+
+            // Telemetry (optional)
+            services.AddApplicationInsightsTelemetry();
+
             // boot
-            services
-                .AddMvc(options =>
-                {
-                    options.Filters.Add<ExceptionActionFilter>();
-                })
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllers();
+
+            //services
+            //    .AddMvc(options =>
+            //    {
+            //        options.Filters.Add<ExceptionActionFilter>();
+                    
+            //    })
+            //    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
 
             app.UseSwagger(c =>
