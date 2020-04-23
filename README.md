@@ -28,12 +28,22 @@ The default url when using docker is https://localhost:8443/swagger/
 
 And run using docker (example for PowerShell)
 ```
+// replace {password}
 docker run --name bankid `
 	-p 8443:443 `
-	-e ASPNETCORE_Kestrel__Certificates__Default__Password="kalleanka" `
+	-e ASPNETCORE_Kestrel__Certificates__Default__Password="{password}" `
 	-e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx `
 	-e ASPNETCORE_URLS=https://+:443 `
 	-e ASPNETCORE_ENVIRONMENT=Development `
 	-v $home\.aspnet\https:/https/:ro `
 	-dit herlitz/bankid:latest
 ```
+Please note that to run https in docker for development you need to fix the developer certificate first
+```
+// This is an example, replace {password}
+dotnet dev-certs https --clean
+dotnet dev-certs https -ep $home\.aspnet\https\aspnetapp.pfx -p {password}
+dotnet dev-certs https --trust
+```
+For more information https://docs.microsoft.com/en-us/aspnet/core/security/docker-compose-https?view=aspnetcore-3.1
+
