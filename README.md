@@ -15,6 +15,9 @@ What you get in the current project is an API that can talk to the BankID API. A
 * Publish NuGet packages
 
 ## Docker and Docker Compose
+
+The default url when using docker is https://localhost:8443/swagger/
+
 **Build and run using docker compose**
 
 `docker-compose up -d`
