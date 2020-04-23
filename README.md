@@ -16,12 +16,14 @@ What you get in the current project is an API that can talk to the BankID API. A
 
 ## Docker and Docker Compose
 **Build and run using docker compose**
+
 `docker-compose up -d`
 
-**simply build using docker compose**
+**Simply build using docker compose**
+
 `docker-compose build`
 
-And run using docker (exampel for PowerShell)
+And run using docker (example for PowerShell)
 ```
 docker run --name bankid `
 	-p 8443:443 `
