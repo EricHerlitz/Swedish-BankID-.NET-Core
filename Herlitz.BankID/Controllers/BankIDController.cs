@@ -167,8 +167,8 @@ namespace Herlitz.BankID.Controllers
             }
 
             // Fallback for default context
-            var ip = _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
-            return new ActionResult<string>(ip);
+            var ip = _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.MapToIPv4();
+            return new ActionResult<string>(ip.ToString());
         }
 
     }
