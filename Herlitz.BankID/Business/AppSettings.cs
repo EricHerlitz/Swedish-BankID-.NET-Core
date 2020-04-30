@@ -10,4 +10,11 @@ namespace Herlitz.BankID.Core
         public string[] CertificatePolicies { get; set; }
         public bool AllowFingerprint { get; set; }
     }
+
+    public class OrderCaching
+    {
+        public bool Allow { get; set; }
+
+        public int Timeout { get; set; }
+    }
 }

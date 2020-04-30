@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 
 // dotnet dev-certs https --trust
@@ -45,7 +46,17 @@ namespace Herlitz.BankID
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Appsettings
             services.Configure<BankIDConfig>(Configuration.GetSection(typeof(BankIDConfig).Name));
+            services.Configure<OrderCaching>(Configuration.GetSection(typeof(OrderCaching).Name));
+
+            // Caching
+            var orderCaching = Configuration.GetSection(typeof(OrderCaching).Name).Get<OrderCaching>();
+            if (orderCaching.Allow)
+            {
+                services.AddMemoryCache(); // for the IMemoryCache
+                services.AddDistributedMemoryCache();
+            }
 
             // Add bankid
             services.AddBankID();
@@ -56,17 +67,7 @@ namespace Herlitz.BankID
             // Configure Swagger
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
-                {
-                    Title = "Herlitz BankID internal API",
-                    Description = "Internal API for BankID services",
-                    Version = "1.0",
-                    Contact = new Microsoft.OpenApi.Models.OpenApiContact
-                    {
-                        Name = "Whom Ever",
-                        Email = "whomever@what.com"
-                    }
-                });
+                c.SwaggerDoc("v1", Configuration.GetSection(typeof(OpenApiInfo).Name).Get<OpenApiInfo>());
 
                 if (_useXmlComments)
                 {
@@ -88,13 +89,6 @@ namespace Herlitz.BankID
             // boot
             services.AddControllers();
 
-            //services
-            //    .AddMvc(options =>
-            //    {
-            //        options.Filters.Add<ExceptionActionFilter>();
-                    
-            //    })
-            //    .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
