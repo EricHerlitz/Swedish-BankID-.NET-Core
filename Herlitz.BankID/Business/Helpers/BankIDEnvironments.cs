@@ -37,7 +37,7 @@ namespace Herlitz.BankID
 
             if (_environment.IsDevelopment())
             {
-                RpCert = "FPTestcert2_20150818_102329.pfx";
+                RpCert = "FPTestcert3_20200618.p12";
                 CaCert = "bankid.cer";
             }
         }
