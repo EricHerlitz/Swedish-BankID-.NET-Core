@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using Herlitz.BankID.Business.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +16,7 @@ namespace Herlitz.BankID.Controllers
         private readonly ICancelRequest _cancelRequest;
         private readonly ICollectRequest _collectRequest;
         private readonly IStatusHandler _statusHandler;
+        private readonly IQRCodeFactory _qRCodeFactory;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public BankIDController(
@@ -24,6 +26,7 @@ namespace Herlitz.BankID.Controllers
             ICancelRequest cancelRequest,
             ICollectRequest collectRequest,
             IStatusHandler statusHandler,
+            IQRCodeFactory qRCodeFactory,
             IHttpContextAccessor httpContextAccessor)
         {
             _bankIdService = bankIdService;
@@ -32,6 +35,7 @@ namespace Herlitz.BankID.Controllers
             _cancelRequest = cancelRequest;
             _collectRequest = collectRequest;
             _statusHandler = statusHandler;
+            _qRCodeFactory = qRCodeFactory;
             _httpContextAccessor = httpContextAccessor;
         }
 
@@ -72,6 +76,18 @@ namespace Herlitz.BankID.Controllers
 
             return new ActionResult<IAuthResponse>(response);
         }
+
+
+        // Auth
+        [HttpGet("QR")]
+        public async Task<ActionResult<string>> GetQR(string autoStartToken)
+        {
+            //_authRequest.AutoStartToken = token;
+            var qr = _qRCodeFactory.GenerateBankIDQRCode(autoStartToken);
+
+            return new ActionResult<string>(qr);
+        }
+
 
 
         // Auth
@@ -120,6 +136,7 @@ namespace Herlitz.BankID.Controllers
         /// <param name="orderRef">Order reference from BankID</param>
         /// <returns></returns>
         [HttpGet("Collect")]
+        //[ResponseCache(Duration = 600, VaryByQueryKeys = new[] { "orderRef" })]
         public async Task<ActionResult<ICollectResponse>> GetCollect(string orderRef)
         {
             _collectRequest.OrderRef = orderRef;

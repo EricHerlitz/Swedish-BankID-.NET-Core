@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Herlitz.BankID.Business.Middleware;
 using Herlitz.BankID.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -48,14 +49,15 @@ namespace Herlitz.BankID
         {
             // Appsettings
             services.Configure<BankIDConfig>(Configuration.GetSection(typeof(BankIDConfig).Name));
-            services.Configure<OrderCaching>(Configuration.GetSection(typeof(OrderCaching).Name));
+            services.Configure<CacheOptions>(Configuration.GetSection(typeof(CacheOptions).Name));
 
             // Caching
-            var orderCaching = Configuration.GetSection(typeof(OrderCaching).Name).Get<OrderCaching>();
+            var orderCaching = Configuration.GetSection(typeof(CacheOptions).Name).Get<CacheOptions>();
             if (orderCaching.Allow)
             {
-                services.AddMemoryCache(); // for the IMemoryCache
-                services.AddDistributedMemoryCache();
+                //services.AddMemoryCache(); // for the IMemoryCache
+                //services.AddDistributedMemoryCache();
+                services.AddResponseCaching();
             }
 
             // Add bankid
@@ -94,6 +96,8 @@ namespace Herlitz.BankID
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //app.UseMiddleware<MemoryCacheMiddleware>();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -103,7 +107,28 @@ namespace Herlitz.BankID
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            // Caching
+            var orderCaching = Configuration.GetSection(typeof(CacheOptions).Name).Get<CacheOptions>();
+            if (orderCaching.Allow)
+            {
+                app.UseResponseCaching();
+
+                //app.Use(async (context, next) =>
+                //{
+                //    context.Response.GetTypedHeaders().CacheControl =
+                //        new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
+                //        {
+                //            Public = true,
+                //            MaxAge = TimeSpan.FromSeconds(10)
+                //        };
+
+                //    context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] = new string[] { "Accept-Encoding" };
+
+                //    await next();
+                //});
+            }
+
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -111,10 +136,8 @@ namespace Herlitz.BankID
             });
 
 
-            app.UseSwagger(c =>
-            {
-
-            });
+            // Swagger
+            app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>

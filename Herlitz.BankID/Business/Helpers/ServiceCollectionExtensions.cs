@@ -6,6 +6,7 @@ using System.Net.Http.Headers;
 using System.Security;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
+using Herlitz.BankID.Business.Helpers;
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.Extensions.DependencyInjection;
@@ -132,6 +133,7 @@ namespace Herlitz.BankID
             services.AddSingleton<ICollectRequest, CollectRequest>();
             services.AddTransient<ICompletionData, CompletionData>();
             services.AddTransient<IRequirement, Requirement>();
+            services.AddTransient<IQRCodeFactory, QRCodeFactory>();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Herlitz.BankID.Core
         public bool AllowFingerprint { get; set; }
     }
 
-    public class OrderCaching
+    public class CacheOptions
     {
         public bool Allow { get; set; }
 
