@@ -9,6 +9,7 @@ namespace Herlitz.BankID.Core
         public string ApiUrl { get; set; }
         public string[] CertificatePolicies { get; set; }
         public bool AllowFingerprint { get; set; }
+        public int QRPixels { get; set; }
     }
 
     public class CacheOptions

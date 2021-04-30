@@ -1,4 +1,6 @@
-﻿using QRCoder;
+﻿using Herlitz.BankID.Core;
+using Microsoft.Extensions.Options;
+using QRCoder;
 
 namespace Herlitz.BankID.Business.Helpers
 {
@@ -9,9 +11,16 @@ namespace Herlitz.BankID.Business.Helpers
 
     public class QRCodeFactory : IQRCodeFactory
     {
+        private readonly BankIDConfig _bankIdConfig;
+
+        public QRCodeFactory(IOptions<BankIDConfig> bankIdConfig)
+        {
+            _bankIdConfig = bankIdConfig.Value;
+        }
+
         public string GenerateBankIDQRCode(string autoStartToken)
         {
-            var bidUrl = $"bankid:///?autostarttoken={autoStartToken}";
+            var bidUrl = $"bankid:///?autostarttoken={autoStartToken.Trim()}";
 
             using (var qrGenerator = new QRCodeGenerator())
             {
@@ -19,7 +28,7 @@ namespace Herlitz.BankID.Business.Helpers
 
                 using (var qrCode = new Base64QRCode(qrCodeData))
                 {
-                    return qrCode.GetGraphic(20);
+                    return qrCode.GetGraphic(_bankIdConfig.QRPixels);
                 }
             }
         }
